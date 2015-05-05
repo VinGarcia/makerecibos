@@ -7,12 +7,12 @@ var dalva = new funcionario(
 		'688.582.726-68',
 		[
 			setSalario(1099.87, 'serviço de cuidadora'),
-			setPagamento(200, 'serviço de diarista'),
-			setValeTransporte(80.20),
+			//setPagamento(200, 'serviço de diarista'),
+			setValeTransporte(7*6.20),
 			setDesconto(0.08, 'desconto INSS')
 		])
-    .pdf(outputDir)
-	  .report()
+    //.pdf(outputDir)
+	  .fullReport()
 
 var ana_maria = new funcionario(
 		'Ana Maria',
@@ -20,12 +20,12 @@ var ana_maria = new funcionario(
 		[
 			setSalario(1099.87, 'serviço de cuidadora'),
 			// diarista 200 + gratificacao 133.50:
-			setPagamento(333.50, 'serviço de diarista'),
-			setValeTransporte(110.60),
+			//setPagamento(333.50, 'serviço de diarista'),
+			setValeTransporte(6*7.90),
 			setDesconto(0.08, 'desconto INSS')
 		])
-		.pdf(outputDir)
-	  .report()
+		//.pdf(outputDir)
+	  .fullReport()
 
 var margareth = new funcionario(
 		'Margareth Maria Martins Rocha de Azevedo',
@@ -33,11 +33,22 @@ var margareth = new funcionario(
 		[
 			setSalario(1099.87, 'serviço de cuidadora'),
 			setPagamento(200, 'serviço de diarista'),
-			setValeTransporte(31.00),
+			setValeTransporte(12*6.20),
 			setDesconto(0.08, 'desconto INSS')
 		])
-		.pdf(outputDir)
-	  .report()
+		//.pdf(outputDir)
+	  //.fullReport()
+
+var lorena = new funcionario(
+		'Lorena Letícia Rocha de Azevedo',
+		'133.420.066-17',
+		[
+			setSalario(788.00, 'serviço de auxiliar de escritório'),
+			setValeTransporte(9*6.20), // (terça e sexta)
+			setDesconto(0.08, 'desconto INSS')
+		])
+		//.pdf(outputDir)
+	  //.fullReport()
 
 
 /* * * * * FUNCTIONS: * * * * */
@@ -244,9 +255,10 @@ function setPagamento(pag, desc) {
 	}
 }
 
-function setValeTransporte(value) {
+function setValeTransporte(cost, days) {
+	days = days || 1
 	return function(values){
-		values.push ( { type: 'transport', value: value, desc: 'vale transporte' } )
+		values.push ( { type: 'transport', value: cost*days, desc: 'vale transporte' } )
  	}
 }
 
